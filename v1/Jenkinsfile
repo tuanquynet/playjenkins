@@ -1,0 +1,53 @@
+pipeline {
+
+  environment {
+    registry = "192.168.1.105:5000/tuanquynet/myweb"
+    dockerImage = ""
+  }
+
+  agent any
+
+  stages {
+
+    stage('Checkout Source') {
+      steps {
+        git url:'https://github.com/tuanquynet/playjenkins.git', branch:'master'
+      }
+    }
+
+    stage('Checking env') {
+      steps{
+        script {
+          sh "pwd"
+          sh "ls"
+        }
+      }
+    }
+
+    stage('Build image') {
+      steps{
+        script {
+          sh "docker version"
+        }
+      }
+    }
+
+    stage('Push Image') {
+      steps{
+        script {
+          sh 'echo "Push image"'
+        }
+      }
+    }
+
+    stage('Deploy App') {
+      steps {
+        script {
+          sh 'echo "Deploy App"'
+        }
+      }
+    }
+
+  }
+
+}
